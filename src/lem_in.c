@@ -6,123 +6,61 @@
 /*   By: wlin <wlin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/18 10:54:29 by wlin              #+#    #+#             */
-/*   Updated: 2017/08/18 12:48:18 by wlin             ###   ########.fr       */
+/*   Updated: 2017/08/19 14:33:28 by wlin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-// first argument has to define the number of ants
-// the amounts of ants cannot be negative and must fit in an int
-int is_ant(char *line)
-{
-	int i;
 
-	i = 0;
-	while (line[i])
+void print_adj(t_room *head)
+{
+	t_link *curr = head->adj_list;
+
+	printf("%s is adjacent to: ", head->name);
+	while (curr)
 	{
-		if (ft_isdigit(line[i]))
-			++i;
-		else
-			return (0);
+		printf("[%s] ", curr->adj_rm->name);
+		curr = curr->next;
 	}
-	return (1);
+	printf("\n");
 }
 
-int	is_comment(char *line)
+void print_rooms(t_room *head)
 {
-	int i;
+	t_room *curr = head;
 
-	i = 0;
-	while (line[i])
+	printf("Room: ");
+	while (curr)
 	{
-		if (i == 0 && line[i] == '#')
-			++i;
-		else if (ft_isprint(linep[i]) && line[i] != '#')
-			++i;
-		else
-			return (0);
+		printf("%s ", curr->name);
+		curr = curr->next;
 	}
-	return (1);
+	printf("\n");
+	//print_adj(head);
 }
 
-int is_mod(char *line)
+void print_antfarm(t_antfarm *farm)
 {
-	if (!ft_strcmp(line, "##start"))
-		return (1);
-	else if (!ft_strcmp(line, "##end"))
-		return (-1);
-	else
-		return (0);
+	printf("Farm has: %d ants.\n", farm->n_ants);
+	printf("Farm has: %d rooms.\n", farm->n_rms);
+	printf("Start room: %s.\n", farm->start);
+	printf("End room: %s.\n", farm->end);
+	print_rooms(farm->rms);
 }
-
-char **is_room(char *line)
-{
-	int i;
-	int j;
-	char **room_def;
-
-	len = 0;
-	room_def = ft_strsplit(line, ' ');
-	while (room[i])
-	{
-		j = 0;
-		while (room_def[i][j] && i == 0)
-		{
-			if (!ft_isalnum(room_def[i][j]))
-				return (NULL);
-			++j;
-		}
-		while (room_def[i][j] && (i == 1 || i == 2))
-		{
-			if (!ft_isdigit(room_def[i][j]))
-				return (NULL);
-			++j;
-		}
-		++i;
-	}
-	return (i == 3 ? room_def : NULL);
-}
-
-int is_link(char *line)
-{
-	
-}
-// error check and parse input into data structure
-int parse_input(char *filename, t_antfarm *farm)
-{
-	int fd;
-	int mod;
-	char *line;
-	char **room_def;
-
-
-	fd = open(filename, O_RDONLY);
-	while (get_next_line(fd, &line) > -1)
-	{
-		//ant def
-		if (is_ant(line) && farm->colony = NULL)
-			farm->colony = (t_ant)malloc(sizeof(t_ant) * ft_atoi(line));
-		//comment def
-	 	else if (is_comment(line))
-			;
-		//mod def
-		else if ((mod = is_mod(line)) != 0)
-			;
-		//room def
-		else if (room_def == is_room(line))
-			add_room(room_def, mod, farm->rms);
-		else if ()
-		//link def
-	}
-}
-
 
 int main(int argc, char **argv)
 {
+	int fd;
 	t_antfarm antFarm;
 
 	if (argc != 2)
-		return (printf("Error\n");
-
+	{
+		puts("Error");
+		// return (1);
+	}
+	init_farm(&antFarm);
+	fd = open(argv[1], O_RDONLY);
+	parse_map(fd, &antFarm);
+	return (0);
 }
