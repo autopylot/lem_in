@@ -6,7 +6,7 @@
 /*   By: wlin <wlin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/19 13:21:10 by wlin              #+#    #+#             */
-/*   Updated: 2017/08/19 14:16:35 by wlin             ###   ########.fr       */
+/*   Updated: 2017/08/21 12:59:09 by wlin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,29 +21,18 @@ int is_ant(char *line)
 	i = 0;
 	while (line[i])
 	{
-		if (ft_isdigit(line[i]))
-			++i;
-		else
+		if (!ft_isdigit(line[i]))
 			return (0);
+		++i;
 	}
 	return (1);
 }
 
 int	is_comment(char *line)
 {
-	int i;
-
-	i = 0;
-	while (line[i])
-	{
-		if (i == 0 && line[i] == '#')
-			++i;
-		else if (ft_isprint(line[i]) && line[i] != '#')
-			++i;
-		else
-			return (0);
-	}
-	return (1);
+	if (line[0] == '#' && line[1] != '#')
+		return (1);
+	return (0);
 }
 
 int is_mod(char *line)
@@ -56,7 +45,7 @@ int is_mod(char *line)
 		return (0);
 }
 
-char **is_room(char *line)
+int is_room(char *line)
 {
 	int i;
 	int j;
@@ -70,18 +59,19 @@ char **is_room(char *line)
 		while (room_def[i][j] && i == 0)
 		{
 			if (!ft_isalnum(room_def[i][j]))
-				return (NULL);
+				return (0);
 			++j;
 		}
 		while (room_def[i][j] && (i == 1 || i == 2))
 		{
 			if (!ft_isdigit(room_def[i][j]))
-				return (NULL);
+				return (0);
 			++j;
 		}
 		++i;
 	}
-	return (i == 3 ? room_def : NULL);
+	//free room_def
+	return (i == 3 ? 1 : 0);
 }
 
 int is_link(char *line, t_room *head)
@@ -107,22 +97,24 @@ int parse_map(int fd, t_antfarm *farm)
 {
 	int mod;
 	char *line;
-	char **room_def;
 
+	mod = 0;
 	while (get_next_line(fd, &line) > 0)
 	{
 		if (is_ant(line) && farm->colony == NULL)
-			farm->colony = (t_ant*)malloc(sizeof(t_ant) * ft_atoi(line));
-		else if (is_comment(line))
-			;
-		else if ((mod = is_mod(line)) != 0)
-			;
-		else if ((room_def = is_room(line)))
-			add_room(room_def, mod, &(farm->rms));
+			init_colony(farm, ft_atoi(line));
+
+		else if (is_mod(line))
+			mod = is_mod(line);
+
+		else if (is_room(line))
+			add_room(line, &mod, farm);
 		else if (is_link(line, farm->rms))
 			setup_links(line, farm->rms);
+		else if (is_comment(line))
+			;
 		else
-			return (0);
+			;//return (0);
 		ft_strdel(&line);
 	}
 	print_antfarm(farm);
