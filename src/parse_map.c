@@ -6,7 +6,7 @@
 /*   By: wlin <wlin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/19 13:21:10 by wlin              #+#    #+#             */
-/*   Updated: 2017/08/21 12:59:09 by wlin             ###   ########.fr       */
+/*   Updated: 2017/08/22 13:09:49 by wlin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,6 @@ int parse_map(int fd, t_antfarm *farm)
 			;//return (0);
 		ft_strdel(&line);
 	}
-	print_antfarm(farm);
+	//print_antfarm(farm);
 	return (1);
 }

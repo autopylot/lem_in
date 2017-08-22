@@ -6,7 +6,7 @@
 /*   By: wlin <wlin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/21 11:45:33 by wlin              #+#    #+#             */
-/*   Updated: 2017/08/21 15:03:54 by wlin             ###   ########.fr       */
+/*   Updated: 2017/08/22 10:58:26 by wlin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,13 +66,17 @@ void add_room(char *line, int *mod, t_antfarm *farm)
 
 void add_link(t_link **adj_list, t_room *adj_rm)
 {
+	t_link *new_link;
 	t_link **curr = adj_list;
 
-	if (*curr == NULL)
-		*curr = init_link(adj_rm);
-	while ((*curr)->next)
-		*curr = (*curr)->next;
-	(*curr)->next = init_link(adj_rm);
+	new_link = init_link(adj_rm);
+	if (*curr)
+	{
+		new_link->next = *curr;
+		*curr = new_link;
+	}
+	else
+		*curr = new_link;
 }
 
 void setup_links(char *line, t_room *head)
@@ -84,14 +88,16 @@ void setup_links(char *line, t_room *head)
 
 	i = -1;
 	link_def = ft_strsplit(line, '-');
+	//printf("Link %s - %s\n", link_def[0], link_def[1]);
 	while (link_def[++i])
 	{
+		//printf("Adj list for room: %s\n", link_def[i]);
 		adj_list = get_adjlist(link_def[i], head);
-		printf("Adj list for room: %s\n", link_def[i]);
+
 		adj_rm = get_room(link_def[i + (i == 0 ? 1 : -1)], head);
-		printf("Adding adj rm: %s\n", link_def[i + (i == 0 ? 1 : -1)]);
+		//printf("Adding adj rm: %s\n", link_def[i + (i == 0 ? 1 : -1)]);
 		add_link(adj_list, adj_rm);
-		printf("%s\n", (*adj_list)->adj_rm->name);
+		//print_adj(*adj_list);
 
 	}
 }

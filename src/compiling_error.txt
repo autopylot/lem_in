@@ -1,0 +1,4 @@
+/nfs/2017/w/wlin/lem_in/src/get_dist.c:13:10: fatal error: 'lem_in.h' file not found
+#include "lem_in.h"
+         ^
+1 error generated.
