@@ -6,11 +6,13 @@
 /*   By: wlin <wlin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/21 11:45:33 by wlin              #+#    #+#             */
-/*   Updated: 2017/08/22 10:58:26 by wlin             ###   ########.fr       */
+/*   Updated: 2017/08/22 13:47:21 by wlin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
+
+
 
 //find room and returns adj list
 t_link **get_adjlist(char *name, t_room *head)

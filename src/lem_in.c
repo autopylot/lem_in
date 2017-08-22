@@ -6,7 +6,7 @@
 /*   By: wlin <wlin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/18 10:54:29 by wlin              #+#    #+#             */
-/*   Updated: 2017/08/22 13:16:12 by wlin             ###   ########.fr       */
+/*   Updated: 2017/08/22 14:32:31 by wlin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,10 @@ void print_colony(t_ant *colony, int n_ants)
 	printf("Ants in colony: ");
 	while (i < n_ants)
 	{
-		printf("%s[] ", colony[i].name);
+		printf("%s[%s] ", colony[i].name, colony[i].curr_rm->name);
 		i++;
 	}
+	printf("\n");
 }
 void print_adj(t_link *adj_list)
 {
@@ -60,10 +61,12 @@ void print_antfarm(t_antfarm *farm)
 	printf("Start room: %s\n", farm->start);
 	printf("End room: %s\n", farm->end);
 	printf("~~~~~~~~~~~~\n");
-	//print position of ants
 	print_room(farm->rms);
+	print_colony(farm->colony, farm->n_ants);
 }
 
+//check for links to rooms not defined
+//check for duplicate links
 int main(int argc, char **argv)
 {
 	int fd;
@@ -77,9 +80,10 @@ int main(int argc, char **argv)
 	init_farm(&antFarm);
 	fd = open(argv[1], O_RDONLY);
 	parse_map(fd, &antFarm);
-	//init_start(&antFarm);
-	print_colony(antFarm.colony, 5);
+	puts("Seg not in parse, but dist");
+	init_start(&antFarm);
 	set_dist(&antFarm);
+	puts("Seg not in dist but print");
 	print_antfarm(&antFarm);
 	return (0);
 }

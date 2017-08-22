@@ -6,7 +6,7 @@
 /*   By: wlin <wlin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/18 12:14:36 by wlin              #+#    #+#             */
-/*   Updated: 2017/08/22 12:50:57 by wlin             ###   ########.fr       */
+/*   Updated: 2017/08/22 14:08:55 by wlin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void init_start(t_antfarm *farm)
 	while (i < farm->n_ants)
 	{
 		farm->colony[i].curr_rm = start;
+		++i;
 	}
 }
 
