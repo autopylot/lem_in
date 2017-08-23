@@ -6,7 +6,7 @@
 /*   By: wlin <wlin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/19 13:21:10 by wlin              #+#    #+#             */
-/*   Updated: 2017/08/22 13:09:49 by wlin             ###   ########.fr       */
+/*   Updated: 2017/08/23 14:21:51 by wlin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ int is_mod(char *line)
 		return (0);
 }
 
+// cannot start with L or #
 int is_room(char *line)
 {
 	int i;
@@ -99,7 +100,7 @@ int parse_map(int fd, t_antfarm *farm)
 	char *line;
 
 	mod = 0;
-	while (get_next_line(fd, &line) > 0)
+	while (get_next_line(0, &line) > 0)
 	{
 		if (is_ant(line) && farm->colony == NULL)
 			init_colony(farm, ft_atoi(line));

@@ -6,7 +6,7 @@
 /*   By: wlin <wlin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/22 11:18:32 by wlin              #+#    #+#             */
-/*   Updated: 2017/08/22 13:12:28 by wlin             ###   ########.fr       */
+/*   Updated: 2017/08/23 12:29:52 by wlin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,11 @@
 
 void init_queue(t_room **queue, int n_rms)
 {
-	while (--n_rms)
-		(queue)[n_rms] = NULL;
+	int i;
+
+	i = -1;
+	while (++i < n_rms)
+		queue[i] = NULL;
 }
 
 
