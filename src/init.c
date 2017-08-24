@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   constructors.c                                     :+:      :+:    :+:   */
+/*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wlin <wlin@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/08/18 12:14:36 by wlin              #+#    #+#             */
-/*   Updated: 2017/08/22 14:08:55 by wlin             ###   ########.fr       */
+/*   Updated: 2017/08/24 14:44:52 by wlin             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,18 +26,17 @@ void init_start(t_antfarm *farm)
 	}
 }
 
-void init_colony(t_antfarm *farm, int n_ants)
+void	init_colony(t_antfarm *farm, char *line)
 {
 	int i;
 
-	i = 0;
-	farm->n_ants = n_ants;
-	farm->colony = (t_ant*)malloc(sizeof(t_ant) * n_ants);
-	while (i < n_ants)
+	i = -1;
+	farm->n_ants = ft_atoi(line);
+	farm->colony = (t_ant*)malloc(sizeof(t_ant) * farm->n_ants);
+	while (++i < farm->n_ants)
 	{
 		farm->colony[i].name = ft_strjoin("L", ft_itoa(i + 1));
 		farm->colony[i].curr_rm = NULL;
-		++i;
 	}
 }
 

@@ -80,16 +80,106 @@
 // }
 #include <stdio.h>
 #include <unistd.h>
+#include <stdlib.h>
+
+// int main()
+// {
+// 	printf("processing... |");
+// 	fflush(stdout);
+// 	sleep(1);
+// 	printf("\b/");
+// 	fflush(stdout);
+// 	sleep(1);
+// 	printf("\b-");
+// 	fflush(stdout);
+// 	if (1 - 4)
+// 		printf("negative");
+// 	printf("%d\n", atoi("sd8989"));
+// 	printf("%d\n", atoi("8989"));
+// }
+
+// typedef struct s_room
+// {
+// 	int id;
+// 	struct s_room *next;
+// }	t_room;
+//
+// typedef struct s_farm
+// {
+// 	t_room *rms;
+// } t_farm;
+//
+//
+// t_room *init(int i)
+// {
+// 	t_room *new;
+//
+// 	new = (t_room*)malloc(sizeof(t_room));
+// 	new->id = i;
+// 	new->next = NULL;
+// 	return (new);
+// }
+//
+// void print(t_room *rm)
+// {
+// 	while (rm)
+// 	{
+// 		printf("%d ->", rm->id);
+// 		rm = rm->next;
+// 	}
+// 	printf("\n");
+// }
+//
+// void add(t_farm farm, t_room *new)
+// {
+// 	if (farm.rms)
+// 	{
+// 		new->next = farm.rms;
+// 		farm.rms = new;
+// 	}
+// 	else
+// 		farm.rms = new;
+// 	print(farm.rms);
+// }
+//
+//
+//
+//
+// int main()
+// {
+// 	t_farm farm;
+//
+// 	farm.rms = NULL;
+// 	t_room *rm1 = init(1);
+// 	t_room *rm2 = init(2);
+// 	t_room *rm3 = init(3);
+// 	add(farm, rm1);
+// 	add(farm, rm2);
+// 	add(farm, rm3);
+// 	print(farm.rms);
+//
+//
+//
+// }
+#include <string.h>
+
 int main()
 {
-	printf("processing... |");
-	fflush(stdout);
-	sleep(1);
-	printf("\b/");
-	fflush(stdout);
-	sleep(1);
-	printf("\b-");
-	fflush(stdout);
-	if (1 - 4)
-		printf("negative");
+	char *str;
+
+	str = (char*)malloc(sizeof(char) * 6);
+	strcpy(str,"happy");
+	printf("%s\n", str);
+	int i = 0;
+	while (str[i])
+	{
+		if (str[i] == 'a')
+		{
+			free(str);
+			str = NULL;
+		}
+		++i;
+	}
+	if (i == 5)
+		printf("ended normals");
 }
